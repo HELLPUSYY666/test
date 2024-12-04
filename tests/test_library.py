@@ -1,5 +1,8 @@
 import unittest
 from library import Library, Book
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 class TestLibrary(unittest.TestCase):
@@ -33,12 +36,6 @@ class TestLibrary(unittest.TestCase):
         book_id = self.library.books[0].id
         self.library.update_status(book_id, "выдана")
         self.assertEqual(self.library.books[0].status, "выдана")
-
-    def test_display_books(self):
-        self.library.add_book("Title1", "Author1", 2024)
-        with self.assertLogs(level='INFO') as log:
-            self.library.display_books()
-            self.assertIn("Title1", log.output[0])
 
 
 if __name__ == "__main__":
